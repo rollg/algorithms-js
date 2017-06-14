@@ -1,4 +1,9 @@
-var arr = [2,7,32132,5,323,43,23,5,8,2345,9,3,5];
+// var arr = [2,7,32132,5,323,43,23,5,8,2345,9,3,5];
+var arr = [];
+var arrayLength = 10000;
+for (var i = 0; i < arrayLength; ++i) {
+    arr.push(Math.floor(Math.random() * 1000));
+}
 
 var t0MergeSort = performance.now();
 var sortedArr = mergeSortModule.mergeSort(arr);
@@ -64,6 +69,22 @@ var visualizeInsertion = function(before, result, method, time) {
     timeTakenElm.innerHTML = 'Time taken: ' + time;
 };
 
+var t0QuickSort = performance.now();
+var quickSortedArr = quickSortModule.quickSort(arr);
+var t1QuickSort = performance.now();
+
+var visualizeQuickSort = function(before, result, method, time) {
+    var methodUsedElm = document.getElementsByClassName('quick-method-used')[0];
+    var inputValueElm = document.getElementsByClassName('quick-input-value')[0];
+    var outputValueElm = document.getElementsByClassName('quick-output-value')[0];
+    var timeTakenElm = document.getElementsByClassName('quick-time-taken')[0];
+
+    methodUsedElm.innerHTML = 'Method used: ' + method;
+    inputValueElm.innerHTML = 'Input value was: ' + before;
+    outputValueElm.innerHTML = 'Result is: ' + result;
+    timeTakenElm.innerHTML = 'Time taken: ' + time;
+};
+
 /*
 * Merge sort
 * */
@@ -83,4 +104,9 @@ visualizeSelection(arr, selectionSortedArr, 'Selection Sort', t1SelectionSort - 
  * Insertion sort
  * */
 visualizeInsertion(arr, insertionSortedArr, 'Insertion Sort', t1InsertionSort - t0InsertionSort);
+
+/*
+ * Quick sort
+ * */
+visualizeQuickSort(arr, quickSortedArr, 'Quick Sort', t1QuickSort - t0QuickSort);
 
